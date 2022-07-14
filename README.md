@@ -1,5 +1,7 @@
 # date-picker-native-module
-native module for date picker 
+
+native module for date picker
+
 ## Installation
 
 ```sh
@@ -9,11 +11,32 @@ npm install date-picker-native-module
 ## Usage
 
 ```js
-import { multiply } from "date-picker-native-module";
+import * as React from 'react';
 
-// ...
+import { StyleSheet, View, requireNativeComponent } from 'react-native';
 
-const result = await multiply(3, 7);
+export default function App() {
+  const DatePicker = requireNativeComponent('PickerView');
+
+  return (
+    <View style={styles.container}>
+      <DatePicker />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  box: {
+    width: 60,
+    height: 60,
+    marginVertical: 20,
+  },
+});
 ```
 
 ## Contributing
