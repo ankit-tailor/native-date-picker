@@ -5,7 +5,7 @@ folly_version = '2022.07.16.00-v1'
 folly_compiler_flags = '-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32'
 
 Pod::Spec.new do |s|
-  s.name         = "date-picker-native-module"
+  s.name         = "native-date-picker-module"
   s.version      = package["version"]
   s.summary      = package["description"]
   s.homepage     = package["homepage"]

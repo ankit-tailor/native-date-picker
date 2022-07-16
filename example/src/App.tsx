@@ -7,7 +7,7 @@ import {
   Button,
   // requireNativeComponent,
 } from 'react-native';
-import { getDatePicker } from 'date-picker-native-module';
+import { getDatePicker } from 'native-date-picker-module';
 
 export default function App() {
   // const DatePicker = requireNativeComponent('PickerView');

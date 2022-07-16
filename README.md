@@ -1,6 +1,12 @@
-# date-picker-native-module
+# native-date-picker-module
 
-native module for date picker
+native module for date picker which opens date picker dialog and let's you select date.
+
+## Inatallation
+
+```
+npm i native-date-picker-module
+```
 
 ## Usage
 
@@ -13,7 +19,7 @@ import {
   Text,
   Button,
 } from 'react-native';
-import { getDatePicker } from 'date-picker-native-module';
+import { getDatePicker } from 'native-date-picker-module';
 
 export default function App() {
   const [result, setResult] = React.useState<{
@@ -64,9 +70,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-## Contributing
-
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+- `getDatePicker` is function that returns promise of result date selected from `DatePickerDialog`.
 
 ## License
 

@@ -22,7 +22,7 @@ import java.util.Calendar;
 
 @ReactModule(name = DatePickerNativeModuleModule.NAME)
 public class DatePickerNativeModuleModule extends ReactContextBaseJavaModule {
-    public static final String NAME = "DatePickerNativeModule";
+    public static final String NAME = "NativeDatePicker";
     public DatePickerDialog mDatPickerDialog;
     public static Calendar newDate = Calendar.getInstance();
     public Promise mCalenderPromise;

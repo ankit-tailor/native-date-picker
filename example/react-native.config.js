@@ -2,7 +2,7 @@ const path = require('path');
 
 module.exports = {
   dependencies: {
-    'date-picker-native-module': {
+    'native-date-picker-module': {
       root: path.join(__dirname, '..'),
     },
   },
