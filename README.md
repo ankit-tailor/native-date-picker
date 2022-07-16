@@ -2,12 +2,6 @@
 
 native module for date picker
 
-## Installation
-
-```sh
-npm install date-picker-native-module
-```
-
 ## Usage
 
 ```jsx
