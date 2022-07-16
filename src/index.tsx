@@ -21,6 +21,6 @@ export function multiply(a: number, b: number): Promise<number> {
   return DatePickerNativeModule.multiply(a, b);
 }
 
-export function getDatePicker(): Promise<number> {
+export function getDatePicker(): Promise<any> {
   return DatePickerNativeModule.getDatePicker();
 }
