@@ -1,5 +1,5 @@
 {
-  "name": "date-picker-native-module",
+  "name": "native-module-date-picker",
   "version": "0.1.0",
   "description": "test",
   "main": "lib/commonjs/index",
