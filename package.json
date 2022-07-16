@@ -35,13 +35,13 @@
     "ios",
     "android"
   ],
-  "repository": "https://github.com/Viraj-10/date-picker-native-module",
-  "author": "viraj, ankit <virajjoshi132@gmail.com> (https://github.com/Viraj-10)",
+  "repository": "https://github.com/ankit-tailor/native-date-picker",
+  "author": "Ankit Tailor",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Viraj-10/date-picker-native-module/issues"
+    "url": "https://github.com/ankit-tailor/native-date-picker/issues"
   },
-  "homepage": "https://github.com/Viraj-10/date-picker-native-module#readme",
+  "homepage": "https://github.com/ankit-tailor/native-date-picker#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
