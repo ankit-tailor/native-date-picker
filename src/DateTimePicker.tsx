@@ -1,4 +1,6 @@
 import { NativeModules, Platform } from 'react-native';
+import type { DatePickerType } from './types';
+import { CONSTANTS, getTimePickerTheme } from './utils';
 
 const { NativeDatePicker } = NativeModules;
 
@@ -19,13 +21,24 @@ const NativeDatePickerModule = NativeDatePicker
       }
     );
 
-function open(props: any) {
-  const { mode } = props;
+function open(props: Partial<DatePickerType>) {
+  const {
+    mode = 'date',
+    is24HoursView = true,
+    colorMode = CONSTANTS.DARK,
+    pickerTheme = CONSTANTS.DEFAULT,
+  } = props;
 
   if (mode === 'date') {
-    return NativeDatePickerModule.getDatePicker();
+    return NativeDatePickerModule.getDatePicker(
+      getTimePickerTheme(pickerTheme, colorMode)
+    );
   } else {
-    return NativeDatePickerModule.getTimePicker();
+    return NativeDatePickerModule.getTimePicker(
+      is24HoursView,
+      colorMode,
+      getTimePickerTheme(pickerTheme, colorMode)
+    );
   }
 }
 
