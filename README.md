@@ -13,45 +13,24 @@ npm i native-date-picker-module
 ```jsx
 import * as React from 'react';
 
-import {
-  StyleSheet,
-  View,
-  Text,
-  Button,
-} from 'react-native';
-import { getDatePicker } from 'native-date-picker-module';
+import { StyleSheet, View, Button } from 'react-native';
+import { DateTimePicker } from 'native-date-picker-module';
 
 export default function App() {
-  const [result, setResult] = React.useState<{
-    day: string;
-    month: string;
-    year: string;
-  }>({
-    day: '',
-    month: '',
-    year: '',
-  });
+  const showDatePicker = async () => {
+    const result = await DateTimePicker.open({ mode: 'date' });
+    console.log(result);
+  };
 
-  const [date, setDate] = React.useState<Date | null>(null);
-
-  React.useEffect(() => {
-    const day = parseInt(result.day);
-    const month = parseInt(result.month);
-    const year = parseInt(result.year);
-    const date = new Date(year, month, day);
-    setDate(date);
-  }, [result]);
+  const showTimePicker = async () => {
+    const result = await DateTimePicker.open({ mode: 'time' });
+    console.log(result);
+  };
 
   return (
     <View style={styles.container}>
-      <Text>Selected date: {`${date?.toLocaleDateString()}`}</Text>
-      <Button
-        title="Click me"
-        onPress={async () => {
-          const result = await getDatePicker();
-          setResult(result);
-        }}
-      />
+      <Button title="Date Picker" onPress={showDatePicker} />
+      <Button title="Time Picker" onPress={showTimePicker} />
     </View>
   );
 }
