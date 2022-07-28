@@ -7,7 +7,15 @@ import {
   Button,
   // requireNativeComponent,
 } from 'react-native';
-import { getDatePicker } from 'native-date-picker-module';
+import { DateTimePicker } from 'native-date-picker-module';
+// import MessageQueue from 'react-native/Libraries/BatchedBridge/MessageQueue';
+// MessageQueue.spy((data) => {
+//   // Ignore logs from WebSocketModule
+//   if (data.module === 'WebSocketModule') {
+//     return;
+//   }
+//   console.log(data);
+// });
 
 export default function App() {
   // const DatePicker = requireNativeComponent('PickerView');
@@ -21,33 +29,33 @@ export default function App() {
     year: '',
   });
 
-  const [date, setDate] = React.useState<Date | null>(null);
+  // const [date, setDate] = React.useState<Date | null>(null);
 
-  React.useEffect(() => {
-    const day = parseInt(result.day);
-    const month = parseInt(result.month);
-    const year = parseInt(result.year);
-    const date = new Date(year, month, day);
-    console.log(date, '####');
-    setDate(date);
-  }, [result]);
+  // React.useEffect(() => {
+  //   const day = parseInt(result.day);
+  //   const month = parseInt(result.month);
+  //   const year = parseInt(result.year);
+  //   const date = new Date(year, month, day);
+  //   console.log(date, '####');
+  //   setDate(date);
+  // }, [result]);
+
+  const showDatePicker = async () => {
+    const result = await DateTimePicker.open({ mode: 'date' });
+    console.log(result, '@@@');
+    // setResult(result);
+  };
+
+  const showTimePicker = async () => {
+    const result = await DateTimePicker.open({ mode: 'time' });
+    console.log(result, '@@@');
+  };
 
   return (
     <View style={styles.container}>
-      <Text>Selected date: {`${date?.toLocaleDateString()}`}</Text>
-      <Button
-        title="Click me"
-        onPress={async () => {
-          const result = await getDatePicker();
-          console.log(result, '@@@');
-          setResult(result);
-        }}
-      />
-      {/* <DatePicker
-        style={{ width: '100%', height: 100 }}
-        // text={'Setting a text on a Custom Native Android View'}
-        buttonText={'This is button text'}
-      /> */}
+      {/* <Text>Selected date: {`${date?.toLocaleDateString()}`}</Text> */}
+      <Button title="Date Picker" onPress={showDatePicker} />
+      <Button title="Time Picker" onPress={showTimePicker} />
     </View>
   );
 }

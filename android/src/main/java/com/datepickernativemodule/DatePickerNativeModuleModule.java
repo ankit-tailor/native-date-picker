@@ -2,9 +2,12 @@ package com.datepickernativemodule;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.text.format.Time;
 import android.util.Log;
 import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 
@@ -24,15 +27,18 @@ import java.util.Calendar;
 public class DatePickerNativeModuleModule extends ReactContextBaseJavaModule {
     public static final String NAME = "NativeDatePicker";
     public DatePickerDialog mDatPickerDialog;
+    public TimePickerDialog mTimePickerDialog;
     public static Calendar newDate = Calendar.getInstance();
+    public static Time newTime = new Time();
     public Promise mCalenderPromise;
+    public Promise mTimePickerPromise;
 
   private final ActivityEventListener mActivityEventListener = new BaseActivityEventListener() {
 //    @Override
     public void onActivityResult() {
       try {
           mCalenderPromise.resolve(newDate);
-//        mImagePickerPromise = null;
+          mTimePickerPromise.resolve(newTime);
       } catch (Exception e) {
         mCalenderPromise.reject("Error", e);
       }
@@ -50,18 +56,14 @@ public class DatePickerNativeModuleModule extends ReactContextBaseJavaModule {
         return NAME;
     }
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
-    public void multiply(double a, double b, Promise promise) {
-        promise.resolve(a + b);
-    }
-
-    @ReactMethod
-  public void getDatePicker(Promise promise) {
+    public void getDatePicker(Promise promise) {
       Activity currentActivity = getCurrentActivity();
-      Calendar newCalendar = Calendar.getInstance();
+
       mCalenderPromise = promise;
+
+      Calendar newCalendar = Calendar.getInstance();
+
       this.mDatPickerDialog = new DatePickerDialog(currentActivity, new DatePickerDialog.OnDateSetListener() {
 
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -78,4 +80,28 @@ public class DatePickerNativeModuleModule extends ReactContextBaseJavaModule {
 
       mDatPickerDialog.show();
     }
+
+  @ReactMethod
+  public void getTimePicker(Promise promise) {
+    Activity currentActivity = getCurrentActivity();
+
+    mTimePickerPromise = promise;
+
+    Time time = new Time();
+    time.setToNow();
+
+    this.mTimePickerDialog = new TimePickerDialog(currentActivity, new TimePickerDialog.OnTimeSetListener() {
+
+      public void onTimeSet(TimePicker timePicker, int hours, int minutes) {
+        newTime.set(0, minutes, hours);
+        WritableMap result = new WritableNativeMap();
+        result.putString("action", "setTime");
+        result.putInt("Hours", hours);
+        result.putInt("Minutes", minutes);
+        mTimePickerPromise.resolve(result);
+      }
+    }, time.hour, time.minute, false);
+
+    mTimePickerDialog.show();
+  }
 }
