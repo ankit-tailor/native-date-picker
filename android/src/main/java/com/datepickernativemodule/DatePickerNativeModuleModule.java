@@ -1,12 +1,14 @@
 package com.datepickernativemodule;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.text.format.Time;
 import android.util.Log;
 import android.widget.DatePicker;
+import android.widget.Switch;
 import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
@@ -57,14 +59,14 @@ public class DatePickerNativeModuleModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void getDatePicker(Promise promise) {
+    public void getDatePicker(int pickerThemeId, Promise promise) {
       Activity currentActivity = getCurrentActivity();
 
       mCalenderPromise = promise;
 
       Calendar newCalendar = Calendar.getInstance();
 
-      this.mDatPickerDialog = new DatePickerDialog(currentActivity, new DatePickerDialog.OnDateSetListener() {
+      this.mDatPickerDialog = new DatePickerDialog(currentActivity, pickerThemeId, new DatePickerDialog.OnDateSetListener() {
 
         public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
           newDate.set(year, monthOfYear, dayOfMonth);
@@ -78,11 +80,23 @@ public class DatePickerNativeModuleModule extends ReactContextBaseJavaModule {
 
       },newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
+//TODO: Min and Max date
+      
+//      DatePicker dp = this.mDatPickerDialog.getDatePicker();
+
+//      if(setMaxDate != -1) {
+//        dp.setMaxDate(setMaxDate);
+//      }
+//
+//      if(setMinDate != -1) {
+//        dp.setMinDate(setMinDate);
+//      }
+
       mDatPickerDialog.show();
     }
 
   @ReactMethod
-  public void getTimePicker(Promise promise) {
+  public void getTimePicker(Boolean is24HoursView, String colorMode, int pickerThemeId, Promise promise) {
     Activity currentActivity = getCurrentActivity();
 
     mTimePickerPromise = promise;
@@ -90,7 +104,7 @@ public class DatePickerNativeModuleModule extends ReactContextBaseJavaModule {
     Time time = new Time();
     time.setToNow();
 
-    this.mTimePickerDialog = new TimePickerDialog(currentActivity, new TimePickerDialog.OnTimeSetListener() {
+    this.mTimePickerDialog = new TimePickerDialog(currentActivity, pickerThemeId, new TimePickerDialog.OnTimeSetListener() {
 
       public void onTimeSet(TimePicker timePicker, int hours, int minutes) {
         newTime.set(0, minutes, hours);
@@ -100,7 +114,7 @@ public class DatePickerNativeModuleModule extends ReactContextBaseJavaModule {
         result.putInt("Minutes", minutes);
         mTimePickerPromise.resolve(result);
       }
-    }, time.hour, time.minute, false);
+    }, time.hour, time.minute, is24HoursView);
 
     mTimePickerDialog.show();
   }
