@@ -5,12 +5,17 @@ import { DateTimePicker } from 'native-date-picker-module';
 
 export default function App() {
   const showDatePicker = async () => {
-    const result = await DateTimePicker.open({ mode: 'date' });
+    const result = await DateTimePicker.open({
+      mode: 'date',
+    });
     console.log(result);
   };
 
   const showTimePicker = async () => {
-    const result = await DateTimePicker.open({ mode: 'time' });
+    const result = await DateTimePicker.open({
+      mode: 'time',
+      is24HoursView: false,
+    });
     console.log(result);
   };
 
