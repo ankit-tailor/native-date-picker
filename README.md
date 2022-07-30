@@ -1,6 +1,6 @@
 # native-date-picker-module
 
-native module for date picker which opens date picker dialog and let's you select date.
+Native module for date & time picker which opens picker dialog and let's you select date or time.
 
 ## Inatallation
 
@@ -54,7 +54,16 @@ const styles = StyleSheet.create({
 });
 ```
 
-- `getDatePicker` is function that returns promise of result date selected from `DatePickerDialog`.
+## `DateTimePicker` native module
+
+- `DateTimePicker.open({})` will open picker.
+
+### Props
+
+- mode: `date` or `time`
+- is24HoursView: Used to show 24 hours view for time picker
+- colorMode: `light` or `dark`
+- pickerTheme: `default` or `spinner`
 
 ## License
 
